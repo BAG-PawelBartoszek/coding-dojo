@@ -7,8 +7,7 @@ public class Validation implements IValidation {
 
     @Override
     public boolean validateRoll(String roll) {
-
-        return false;
+        return roll.matches("[1-6],[1-6],[1-6],[1-6],[1-6]");
     }
 
     @Override
