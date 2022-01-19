@@ -1,6 +1,8 @@
 package yahtzee.rules;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class RuleImpl implements Rule {
 
@@ -39,7 +41,13 @@ public class RuleImpl implements Rule {
     }
 
     private int largeStraight(int[] roll) {
-        return 0;
+        int[] expected = {2,3,4,5,6};
+        for (int i : expected) {
+            if (IntStream.of(roll).noneMatch(x -> x == i)) {
+                return 0;
+            }
+        }
+        return 20;
     }
 
     private int smallStraight(int[] roll) {
