@@ -26,7 +26,12 @@ public class RuleImpl implements Rule {
     }
 
     private int yahtzeeScore(int[] roll) {
-        return 0;
+        for (int i : roll) {
+            if (i != roll[0]) {
+                return 0;
+            }
+        }
+        return 50;
     }
 
     private int fullHouse(int[] roll) {
@@ -54,10 +59,24 @@ public class RuleImpl implements Rule {
     }
 
     private int pair(int[] roll) {
+        int[] temp = Arrays.copyOf(roll, roll.length);
+        Arrays.sort(temp);
+        for(int i = temp.length-1; i>0; i--){
+            if(temp[i] == temp[i-1]){
+                return 2*temp[i];
+            }
+        }
+
         return 0;
     }
 
     private int single(int ruleindex, int[] roll) {
-        return 0;
+        int result = 0;
+        for(int i: roll){
+            if(i == ruleindex+1){
+                result += i;
+            }
+        }
+        return result;
     }
 }
