@@ -1,5 +1,7 @@
 package yahtzee.rules;
 
+import java.util.Arrays;
+
 public class RuleImpl implements Rule {
 
     @Override
@@ -20,7 +22,7 @@ public class RuleImpl implements Rule {
     }
 
     private int chance(int[] roll) {
-        return 0;
+        return Arrays.stream(roll).parallel().reduce(0, Integer::sum);
     }
 
     private int yahtzeeScore(int[] roll) {
