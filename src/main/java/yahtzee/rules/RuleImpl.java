@@ -51,7 +51,13 @@ public class RuleImpl implements Rule {
     }
 
     private int smallStraight(int[] roll) {
-        return 0;
+        int[] expected = {1,2,3,4,5};
+        for (int i : expected) {
+            if (IntStream.of(roll).noneMatch(x -> x == i)) {
+                return 0;
+            }
+        }
+        return 15;
     }
 
     private int fourOfAKind(int[] roll) {
