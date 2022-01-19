@@ -61,11 +61,47 @@ public class RuleImpl implements Rule {
     }
 
     private int fourOfAKind(int[] roll) {
-        return 0;
+        Set<Integer> set = new HashSet<Integer>(Arrays.asList(roll));
+        if (set.size <= 4) {
+            int[] sorted = Arrays.sort(roll);
+            int num = 0;
+            int count = 0;
+            for (int i = 0; i < sorted.length; i++) {
+                if (count == 4) {
+                    return 4 * num;
+                }
+                if (sorted[i] == num) {
+                    count++;
+                } else {
+                    num = sorted[i];
+                    count++;
+                }
+            }
+        } else {
+            return 0;
+        }
     }
 
     private int threeOfAKind(int[] roll) {
-        return 0;
+        Set<Integer> set = new HashSet<Integer>(Arrays.asList(roll));
+        if (set.size <= 3) {
+            int[] sorted = Arrays.sort(roll);
+            int num = 0;
+            int count = 0;
+            for (int i = 0; i < sorted.length; i++) {
+                if (count == 3) {
+                    return 3 * num;
+                }
+                if (sorted[i] == num) {
+                    count++;
+                } else {
+                    num = sorted[i];
+                    count++;
+                }
+            }
+        } else {
+            return 0;
+        }
     }
 
     private int twoPairs(int[] roll) {
