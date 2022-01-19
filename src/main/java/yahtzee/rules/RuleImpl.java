@@ -1,5 +1,9 @@
 package yahtzee.rules;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class RuleImpl implements Rule {
 
     @Override
@@ -20,11 +24,16 @@ public class RuleImpl implements Rule {
     }
 
     private int chance(int[] roll) {
-        return 0;
+        return Arrays.stream(roll).parallel().reduce(0, Integer::sum);
     }
 
     private int yahtzeeScore(int[] roll) {
-        return 0;
+        for (int i : roll) {
+            if (i != roll[0]) {
+                return 0;
+            }
+        }
+        return 50;
     }
 
     private int fullHouse(int[] roll) {
@@ -32,11 +41,23 @@ public class RuleImpl implements Rule {
     }
 
     private int largeStraight(int[] roll) {
-        return 0;
+        int[] expected = {2,3,4,5,6};
+        for (int i : expected) {
+            if (IntStream.of(roll).noneMatch(x -> x == i)) {
+                return 0;
+            }
+        }
+        return 20;
     }
 
     private int smallStraight(int[] roll) {
-        return 0;
+        int[] expected = {1,2,3,4,5};
+        for (int i : expected) {
+            if (IntStream.of(roll).noneMatch(x -> x == i)) {
+                return 0;
+            }
+        }
+        return 15;
     }
 
     private int fourOfAKind(int[] roll) {
@@ -88,10 +109,24 @@ public class RuleImpl implements Rule {
     }
 
     private int pair(int[] roll) {
+        int[] temp = Arrays.copyOf(roll, roll.length);
+        Arrays.sort(temp);
+        for(int i = temp.length-1; i>0; i--){
+            if(temp[i] == temp[i-1]){
+                return 2*temp[i];
+            }
+        }
+
         return 0;
     }
 
     private int single(int ruleindex, int[] roll) {
-        return 0;
+        int result = 0;
+        for(int i: roll){
+            if(i == ruleindex+1){
+                result += i;
+            }
+        }
+        return result;
     }
 }
