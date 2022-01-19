@@ -26,7 +26,12 @@ public class RuleImpl implements Rule {
     }
 
     private int yahtzeeScore(int[] roll) {
-        return 0;
+        for (int i : roll) {
+            if (i != roll[0]) {
+                return 0;
+            }
+        }
+        return 50;
     }
 
     private int fullHouse(int[] roll) {
