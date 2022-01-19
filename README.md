@@ -19,3 +19,8 @@ Aktualisierung des Spielstands
 Prüfung ob alle Kategorien befüllt
 - ja -> Spielende
 - nein -> Beginne von Neuem
+
+Wurf -> Array aus 5 int
+
+Spielstand -> Map Kategorie - Wurf
+
